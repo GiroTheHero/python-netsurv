@@ -94,7 +94,7 @@ class DVRIPCam(object):
 			return False
 
 	def pretty_print(self, data):
-		print json.dumps(data, indent = 4, sort_keys = True)		
+		print (json.dumps(data, indent = 4, sort_keys = True))
 
 	def keep_alive(self):
 		message_struct = {"Name" : "KeepAlive", "SessionID" :self.session_id_hex}
