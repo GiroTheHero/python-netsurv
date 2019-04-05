@@ -11,7 +11,7 @@ def dec_to_rev_hex(integer):
 	"""Accepts an integer and returns a 4 byte list of hex chars
 		in reverse order"""
 
-	byte_list = list(reversed([chr(ord(b)) for b in struct.pack('>I',integer)]))
+	byte_list = list(reversed([chr(ord(chr(b))) for b in struct.pack('>I',integer)]))
 	return "".join(byte_list)
 
 def bytes(integer):
@@ -36,7 +36,7 @@ class DVRIPCam(object):
 	def close(self):
 		self.socket.close()
 	def send_packet(self, msg):	
-		self.socket.send(msg)
+		self.socket.send(bytearray(msg,'utf-8'))
 		data = self.socket.recv(5012+5012)
 		return data
 	def clean_response(self, data):
